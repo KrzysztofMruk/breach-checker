@@ -44,3 +44,40 @@ IMAGE CREATED CREATED BY SIZE COMMENT
 
 Komentarz:
 Z obrazu bazowego pochodzą wszystkie warstwy oprócz pierwszych pięciu (moje kończą się na <missing> 19 minutes ago LABEL maintainer=imie.nazwisko@example.com 0B buildkit.dockerfile.v0). Niektóre mają rozmiar 0B, ponieważ są to tylko labele. Widzę tylko moją wartość, ponieważ ją ją zmieniłem jako ostatni przed utworzeniem mojego obrazu
+
+Zad. 2
+Kontener 1:
+Sun Oct 25 20:46:41 UTC 2026
+
+Kontener 2:
+Sun Oct 25 20:46:41 UTC 2026
+
+PS C:\Users\kmspo\wirtualizacja\breach-checker> docker ps
+CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES
+6cc818dd7dc6 krzysztof-frontend:v2 "/docker-entrypoint.…" 2 minutes ago Up 2 minutes 0.0.0.0:8081->80/tcp, [::]:8081->80/tcp kfront2
+42caca91f3a1 krzysztof-frontend:v2 "/docker-entrypoint.…" 9 minutes ago Up 9 minutes 0.0.0.0:8080->80/tcp, [::]:8080->80/tcp kfront
+
+Zad. 3
+root /usr/share/nginx/html
+
+Linia ta wskazuje domyślny katalog główny serwera WWW (document root), z którego Nginx pobiera i serwuje pliki statyczne
+
+Zad. 4
+PS C:\Users\kmspo\wirtualizacja\breach-checker> docker exec kfront3 ls /usr/share/nginx
+html
+index.html
+script.js
+style.css
+
+PS C:\Users\kmspo\wirtualizacja\breach-checker> docker exec kfront3 ls /usr/share/nginx/html
+50x.html
+build.txt
+index.html
+
+htmlhint sprawdził fabryczny plik powitalny zamiast naszego. Plik istniał więc poprawnie stworzono obraz
+
+Zad. 5
+PS C:\Users\kmspo\wirtualizacja\breach-checker> docker rmi breach-checker-frontend:v2
+Untagged: breach-checker-frontend:v2
+
+Polecenie docker rmi faktycznie usuwa obraz i zwalnia jego warstwy z dysku dopiero wtedy, gdy usuwany jest ostatni tag wskazujący na dany IMAGE ID (oraz żaden kontener – nawet zatrzymany – z tego obrazu nie korzysta).

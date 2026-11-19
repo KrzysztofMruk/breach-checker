@@ -9,3 +9,5 @@ COPY app.py .
 USER appuser
 EXPOSE 5000
 CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "2", "--no-control-socket", "app:app"]
+# Łączy obraz w GHCR z repozytorium projektu (uprawnienia pakietu dziedziczone z repozytorium)
+LABEL org.opencontainers.image.source="https://github.com/KrzysztofMruk/breach-checker"
